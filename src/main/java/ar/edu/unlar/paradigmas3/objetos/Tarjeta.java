@@ -1,6 +1,5 @@
 package ar.edu.unlar.paradigmas3.objetos;
 
-import java.util.Date;
 
 public class Tarjeta {
     private int saldo;
@@ -13,7 +12,15 @@ public class Tarjeta {
         this.año_vencimiento = año_vencimiento;
     }
 
+    public int getSaldo() {
+        return saldo;
+    }
 
+    public void setSaldo(int saldo) {
+        this.saldo = saldo;
+    }
+
+    
     @Override
     public String toString() {
         return "\nTarjeta [saldo=" + saldo + ", idTarjeta=" + idTarjeta + ", año_vencimiento=" + año_vencimiento + "]\n";

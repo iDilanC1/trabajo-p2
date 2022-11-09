@@ -1,9 +1,7 @@
 package ar.edu.unlar.paradigmas3;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Date;
 
 import ar.edu.unlar.paradigmas3.objetos.*;
 
@@ -183,7 +181,6 @@ public class App
         buscaPelicula = input.nextLine();
         
         do{
-            int permitido = 0;
             System.out.println("Ingrese si es un pedido de venta o alquiler:\n0. No realizar pedido\n1. Alquiler\n2. Venta\n-");
             realizarPedido = input.nextInt();
             input.nextLine();
@@ -199,25 +196,27 @@ public class App
 
                             for(j = 0; j < socios.size(); j++) {
 
-                                if(items.get(i) instanceof Item) {
-                                    Item it = (Item) items.get(i);
+                                if(items.get(j) instanceof Item) {
+                                    Item it = (Item) items.get(j);
                                     // && it.sacarPelicula(cantidad_pelicula)
                                     if((it.getPelicula().getNombre()).equals(buscaPelicula)) {
 
-                                        permitido = 2;
                                         System.out.println("Pelicula encontrada\n" + it.getPelicula());
                                         Pelicula peliculaEncotrada = it.getPelicula();
             
                                         if(it.getPelicula().getClasificacion() <= socios.get(i).getEdad()) {
 
-                                            if(it.sacarPelicula(cantidad_pelicula)){
-                                                Pedido pedido = new Pedido(tipoPedido,idPedido, socios.get(i), it.getPelicula() ,it.getPelicula().getPrecioAlquiler());
+                                            if(it.sacarPelicula(cantidad_pelicula) && it.getPelicula().getPrecioAlquiler() <= socios.get(i).getTarjeta().getSaldo()){
+
+                                                socios.get(i).getTarjeta().setSaldo(socios.get(i).getTarjeta().getSaldo() - it.getPelicula().getPrecioAlquiler() * cantidad_pedido);
+
+                                                Pedido pedido = new Pedido(tipoPedido, idPedido, socios.get(i), it.getPelicula() ,it.getPelicula().getPrecioAlquiler());
                                                 pedidos.add(pedido);
+
                                             }
                                             else{
                                                 System.out.println("Cantidad mayor a la deseada");
                                             }
-
 
 
                                         }
@@ -249,25 +248,28 @@ public class App
 
                             for(j = 0; j < socios.size(); j++) {
 
-                                if(items.get(i) instanceof Item) {
-                                    Item it = (Item) items.get(i);
+                                if(items.get(j) instanceof Item) {
+                                    Item it = (Item) items.get(j);
                                     // && it.sacarPelicula(cantidad_pelicula)
                                     if((it.getPelicula().getNombre()).equals(buscaPelicula)) {
 
-                                        permitido = 2;
                                         System.out.println("Pelicula encontrada\n" + it.getPelicula());
                                         Pelicula peliculaEncotrada = it.getPelicula();
             
                                         if(it.getPelicula().getClasificacion() <= socios.get(i).getEdad()) {
 
-                                            if(it.sacarPelicula(cantidad_pelicula)){
-                                                Pedido pedido = new Pedido(tipoPedido, idPedido, socios.get(i), it.getPelicula() ,it.getPelicula().getPrecioAlquiler());
+                                            if(it.sacarPelicula(cantidad_pelicula) && it.getPelicula().getPrecioVenta() <= socios.get(i).getTarjeta().getSaldo()){
+
+                                                socios.get(i).getTarjeta().setSaldo(socios.get(i).getTarjeta().getSaldo() - it.getPelicula().getPrecioVenta() * cantidad_pedido);
+
+                                                Pedido pedido = new Pedido(tipoPedido, idPedido, socios.get(i), it.getPelicula() ,it.getPelicula().getPrecioVenta());
                                                 pedidos.add(pedido);
+
+
                                             }
                                             else{
                                                 System.out.println("Cantidad mayor a la deseada");
                                             }
-
 
                                         }
 
@@ -286,6 +288,7 @@ public class App
                       
             } // fin if realizarPedido
         }while(realizarPedido != 0 || realizarPedido == 1 || realizarPedido == 2);
+
 
         System.out.println(pedidos);
         System.out.println("\n\n" + socios);

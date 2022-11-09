@@ -1,6 +1,5 @@
 package ar.edu.unlar.paradigmas3.objetos;
 
-import java.util.Date;
 
 public class Socio {
     private String nombre;
@@ -12,6 +11,11 @@ public class Socio {
     private int edad;
     private int idSocio;
     private Tarjeta tarjeta;
+
+
+    public Tarjeta getTarjeta() {
+        return tarjeta;
+    }
 
 
     public Socio(String nombre, String apellido, String dni, String direccion, String telefono, String email, int edad,
