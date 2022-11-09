@@ -211,7 +211,7 @@ public class App
                                         if(it.getPelicula().getClasificacion() <= socios.get(i).getEdad()) {
 
                                             if(it.sacarPelicula(cantidad_pelicula)){
-                                                Pedido pedido = new Pedido(idPedido, socios.get(i), it.getPelicula() ,it.getPelicula().getPrecioAlquiler());
+                                                Pedido pedido = new Pedido(tipoPedido,idPedido, socios.get(i), it.getPelicula() ,it.getPelicula().getPrecioAlquiler());
                                                 pedidos.add(pedido);
                                             }
                                             else{
@@ -236,9 +236,60 @@ public class App
                 }//fin for i
                       
             } // fin if realizarPedido
-        }while(realizarPedido != 0);
+
+            if(realizarPedido == 2){
+                tipoPedido = "Venta";
+
+                System.out.println("Cantidad a vender: ");
+                cantidad_pedido = input.nextInt(); input.nextLine(); 
+                    //Falta hacer que se baje el stock y que se permita por la edad
+                for(i = 0; i < socios.size(); i++) {
+                    if(socios.get(i) instanceof Socio && (socios.get(i).getNombre()).equals(nombreSocio)) {
+                            System.out.println("Socio encontrado\n" + socios.get(i));
+
+                            for(j = 0; j < socios.size(); j++) {
+
+                                if(items.get(i) instanceof Item) {
+                                    Item it = (Item) items.get(i);
+                                    // && it.sacarPelicula(cantidad_pelicula)
+                                    if((it.getPelicula().getNombre()).equals(buscaPelicula)) {
+
+                                        permitido = 2;
+                                        System.out.println("Pelicula encontrada\n" + it.getPelicula());
+                                        Pelicula peliculaEncotrada = it.getPelicula();
+            
+                                        if(it.getPelicula().getClasificacion() <= socios.get(i).getEdad()) {
+
+                                            if(it.sacarPelicula(cantidad_pelicula)){
+                                                Pedido pedido = new Pedido(tipoPedido, idPedido, socios.get(i), it.getPelicula() ,it.getPelicula().getPrecioAlquiler());
+                                                pedidos.add(pedido);
+                                            }
+                                            else{
+                                                System.out.println("Cantidad mayor a la deseada");
+                                            }
+
+
+                                        }
+
+                                    }
+
+                                }else{
+                                    System.out.println("Pelicula no encontrada");
+                                }
+
+                            }
+                            
+                    }else{
+                            System.out.println("Socio no encontrado");
+                        }         
+                }//fin for i
+                      
+            } // fin if realizarPedido
+        }while(realizarPedido != 0 || realizarPedido == 1 || realizarPedido == 2);
 
         System.out.println(pedidos);
+        System.out.println("\n\n" + socios);
+        System.out.println("\n\n" + catalogos);
 
 
     }

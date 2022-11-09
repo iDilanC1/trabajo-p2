@@ -13,8 +13,8 @@ public class Item {
  
     public Boolean sacarPelicula(int cantidad_sacada){
         if (cantidad_sacada <= cantidad){
-            this.cantidad -= cantidad_sacada;
-            this.disponible = (cantidad <= 0);
+            cantidad -= cantidad_sacada;
+            this.disponible = (cantidad == 0);
             return this.disponible;
         }  
         else{

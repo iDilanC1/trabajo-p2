@@ -7,7 +7,9 @@ public class Pedido {
     private Pelicula pelicula;
     private int precio;
     
-    public Pedido(int idPedido, Socio socio, Pelicula pelicula, int precio) {
+
+    public Pedido(String tipoPedido, int idPedido, Socio socio, Pelicula pelicula, int precio) {
+        this.tipoPedido = tipoPedido;
         this.idPedido = idPedido;
         this.socio = socio;
         this.pelicula = pelicula;
@@ -59,6 +61,6 @@ public class Pedido {
         return "Pedido [tipoPedido=" + tipoPedido + ", idPedido=" + idPedido + ", socio=" + socio + ", pelicula="
                 + pelicula + ", precio=" + precio + "]";
     }
-
+  
     
 }
