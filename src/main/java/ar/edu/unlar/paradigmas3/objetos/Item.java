@@ -9,6 +9,7 @@ public class Item {
         this.pelicula = pelicula;
         this.cantidad = cantidad;
         this.disponible = disponible;
+        
     }
  
     public Boolean sacarPelicula(int cantidad_sacada){
