@@ -5,8 +5,7 @@ import java.util.Scanner;
 
 import ar.edu.unlar.paradigmas3.objetos.*;
 
-public class App 
-{
+public class App {
     public static void main( String[] args ) {
         
         Scanner input = new Scanner(System.in);
